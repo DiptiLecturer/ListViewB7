@@ -20,12 +20,15 @@ class FriendAdapter(
         position: Int, convertView: View?, parent: ViewGroup?
     ): View? {
         val binding: ItemListBinding
+        val view: View
 
         if (convertView == null) {
             binding = ItemListBinding.inflate(LayoutInflater.from(context), parent, false)
-            return binding.root
+            view = binding.root
+            view.tag = binding   // ⭐ VERY IMPORTANT
         } else {
-            binding = convertView.tag as ItemListBinding
+            view = convertView
+            binding = view.tag as ItemListBinding
         }
 
         val friend = friendList[position]
